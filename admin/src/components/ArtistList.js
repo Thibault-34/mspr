@@ -1,17 +1,17 @@
-import React from 'react';
-import { List, Datagrid, TextField, EmailField } from 'react-admin';
+import React from 'react'
+import { List, Datagrid, TextField, EmailField } from 'react-admin'
 
 export const ArtistList = props => (
-	<List {...props}>
-		<Datagrid rowClick="edit">
-			<TextField source="id" />
-			<TextField source="name" />
-			<TextField source="style" />
-			<TextField source="image" />
-			<TextField source="description" />
-			<TextField source="facebook" />
-			<TextField source="instagram" />
-			<TextField source="spotify" />
-		</Datagrid>
-	</List>
-);
+    <List {...props}>
+        <Datagrid rowClick="edit">
+            <TextField source="id" />
+            <TextField source="name" />
+            <TextField source="style" />
+            <TextField source="image" />
+            <TextField source="description" />
+            <TextField source="facebook" />
+            <TextField source="instagram" />
+            <TextField source="spotify" />
+        </Datagrid>
+    </List>
+)
