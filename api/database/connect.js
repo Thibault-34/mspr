@@ -3,12 +3,13 @@ const mysql = require('mysql')
 // Settings
 // Create MySQL connection
 const con = mysql.createConnection({
-    socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
+    // socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
     host: 'localhost',
     user: 'root',
-    password: 'root',
-    database: 'mspr',
+    password: '',
+    database: 'mspr_bdd',
     multipleStatements: true,
+    port: 3308,
 })
 
 // Test mysql connection
