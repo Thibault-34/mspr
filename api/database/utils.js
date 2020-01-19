@@ -1,24 +1,27 @@
 const con = require('./connect')
 
-const getArtists = () => {
+const getList = table => {
     return new Promise(resolve => {
-        con.query(`SELECT * FROM Artist`, (error, results) => {
+        con.query(`SELECT * FROM ${table}`, (error, results) => {
             if (error) throw error
             resolve(results)
         })
     })
 }
 
-const getArtistById = id => {
+const getOne = (table, id) => {
     return new Promise(resolve => {
-        con.query(`SELECT * FROM Artist WHERE id = ${id}`, (error, results) => {
-            if (error) throw error
-            resolve(results)
-        })
+        con.query(
+            `SELECT * FROM ${table} WHERE id = ${id}`,
+            (error, results) => {
+                if (error) throw error
+                resolve(results)
+            }
+        )
     })
 }
 
-const updateArtistById = (id, fields) => {
+const updateOne = (table, id, fields) => {
     const {
         name,
         style,
@@ -31,7 +34,7 @@ const updateArtistById = (id, fields) => {
 
     return new Promise(resolve => {
         con.query(
-            `UPDATE Artist SET name = "${name}", style = "${style}", image = "${image}", description = "${description}", facebook = "${facebook}", instagram = "${instagram}", spotify = "${spotify}" WHERE id = ${id}`,
+            `UPDATE ${table} SET name = "${name}", style = "${style}", image = "${image}", description = "${description}", facebook = "${facebook}", instagram = "${instagram}", spotify = "${spotify}" WHERE id = ${id}`,
             (error, results, fields) => {
                 if (error) throw error
                 resolve(id)
@@ -40,7 +43,7 @@ const updateArtistById = (id, fields) => {
     })
 }
 
-const createArtistById = fields => {
+const createOne = (table, fields) => {
     const {
         name,
         style,
@@ -53,7 +56,7 @@ const createArtistById = fields => {
 
     return new Promise(resolve => {
         con.query(
-            `INSERT INTO Artist (id, name, style, image, description, facebook, instagram, spotify) 
+            `INSERT INTO ${table} (id, name, style, image, description, facebook, instagram, spotify) 
 			VALUES (NULL, "${name}", "${style}", "${image}", "${description}", "${facebook}", "${instagram}", "${spotify}")
 			`,
             (error, results) => {
@@ -65,10 +68,10 @@ const createArtistById = fields => {
     })
 }
 
-const deleteArtistById = id => {
+const deleteOne = (table, id) => {
     return new Promise(resolve => {
         con.query(
-            `DELETE FROM Artist WHERE id = ${id}`,
+            `DELETE FROM ${table} WHERE id = ${id}`,
             (error, results, fields) => {
                 if (error) throw error
                 resolve(results)
@@ -78,9 +81,9 @@ const deleteArtistById = id => {
 }
 
 module.exports = {
-    getArtists,
-    getArtistById,
-    updateArtistById,
-    createArtistById,
-    deleteArtistById,
+    getList,
+    getOne,
+    updateOne,
+    createOne,
+    deleteOne,
 }
