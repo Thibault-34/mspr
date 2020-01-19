@@ -1,7 +1,7 @@
 import React from 'react';
 import { Edit, SimpleForm, TextInput } from 'react-admin';
 
-export const FilmEdit = props => (
+export const ArtistEdit = props => (
 	<Edit {...props}>
 		<SimpleForm>
 			<TextInput source="name" />

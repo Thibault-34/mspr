@@ -1,34 +1,21 @@
 const con = require('./connect');
 
-const stringifyParams = params => {
-	if (Object.keys(params).length === 0) {
-		return '';
-	}
-	return (
-		'WHERE ' +
-		Object.keys(params)
-			.map(query => `${query} = "${params[query]}"`)
-			.join(' AND ')
-	);
-};
-
-const getArtists = params => {
+const getArtists = () => {
 	return new Promise(resolve => {
-		con.query(`SELECT * FROM Artist`, (error, results, fields) => {
+		con.query(`SELECT * FROM Artist`, (error, results) => {
 			if (error) throw error;
 			resolve(results);
 		});
 	});
 };
 
-const getArtistById = (id, callback) => {
-	con.query(
-		`SELECT * FROM Artist WHERE id = ${id}`,
-		(error, results, fields) => {
+const getArtistById = id => {
+	return new Promise(resolve => {
+		con.query(`SELECT * FROM Artist WHERE id = ${id}`, (error, results) => {
 			if (error) throw error;
-			callback(results);
-		},
-	);
+			resolve(results);
+		});
+	});
 };
 
 const updateArtistById = (id, fields) => {
@@ -53,7 +40,7 @@ const updateArtistById = (id, fields) => {
 	});
 };
 
-const createArtist = fields => {
+const createArtistById = fields => {
 	const {
 		name,
 		style,
@@ -70,7 +57,6 @@ const createArtist = fields => {
 			VALUES (NULL, "${name}", "${style}", "${image}", "${description}", "${facebook}", "${instagram}", "${spotify}")
 			`,
 			(error, results) => {
-				console.log(results.insertId);
 				if (error) throw error;
 
 				resolve({ ...results, id: results.insertId });
@@ -95,6 +81,6 @@ module.exports = {
 	getArtists,
 	getArtistById,
 	updateArtistById,
-	createArtist,
+	createArtistById,
 	deleteArtistById,
 };

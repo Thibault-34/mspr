@@ -5,12 +5,12 @@ const {
 	updateArtistById,
 	createArtist,
 	deleteArtistById,
-} = require('./database/utils');
+} = require('../database/utils');
 
-const router = express.Router();
+const artistRouter = express.Router();
 
-router.get('/', (req, res) => {
-	getArtists(req.query).then(artists => {
+artistRouter.get('/', (req, res) => {
+	getArtists().then(artists => {
 		res.set({
 			'X-Total-Count': '100',
 			'Access-Control-Expose-Headers': 'X-Total-Count',
@@ -19,29 +19,28 @@ router.get('/', (req, res) => {
 	});
 });
 
-router.post('/', (req, res) => {
+artistRouter.post('/', (req, res) => {
 	createArtist(req.body).then(result => {
 		res.json(result);
 	});
 });
 
-router.put('/:id', (req, res) => {
+artistRouter.put('/:id', (req, res) => {
 	updateArtistById(req.params.id, req.body).then(id => {
 		res.status(200).send({ id });
 	});
 });
 
-router.get('/:id', (req, res) =>
-	getArtistById(req.params.id, artist => {
+artistRouter.get('/:id', (req, res) =>
+	getArtistById(req.params.id).then(artist => {
 		res.json(artist);
 	}),
 );
 
-router.delete('/:id', (req, res) => {
+artistRouter.delete('/:id', (req, res) => {
 	deleteArtistById(req.params.id).then(result => {
-		console.log(result);
 		res.json(result);
 	});
 });
 
-module.exports = router;
+module.exports = artistRouter;
