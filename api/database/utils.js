@@ -35,11 +35,10 @@ const updateOne = (table, id, fields) => {
 }
 
 const createOne = (table, fields) => {
-    console.log(sql)
     return new Promise(resolve => {
         con.query(
-            `INSERT INTO ?? (?) VALUES (?)`,
-            [table, Object.keys(fields), Object.values(fields)],
+            `INSERT INTO ?? (${Object.keys(fields).join(', ')}) VALUES (?)`,
+            [table, Object.values(fields)],
             (error, results) => {
                 if (error) throw error
                 resolve({ ...results, id: results.insertId })
