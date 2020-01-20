@@ -10,13 +10,15 @@ import {
     ReferenceInput,
     SelectInput,
     ReferenceField,
+    DateField,
+    DateInput,
 } from 'react-admin'
 
 export const eventCreate = props => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput helperText="YYYY/MM/DD" source="date" />
-            <TextInput helperText="HH:MM:SS" source="schedule" />
+            <DateInput source="date" locales="fr-FR" />
+            <TextInput source="schedule" helperText="HH:MM:SS" />
             <ReferenceInput
                 label="Artiste"
                 source="artiste_id"
@@ -34,8 +36,8 @@ export const eventCreate = props => (
 export const eventEdit = props => (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput source="date" />
-            <TextInput source="schedule" />
+            <DateInput source="date" locales="fr-FR" />
+            <TextInput source="schedule" helperText="HH:MM:SS" />
         </SimpleForm>
     </Edit>
 )
@@ -44,7 +46,7 @@ export const eventList = props => (
     <List {...props}>
         <Datagrid rowClick="edit">
             <TextField source="id" />
-            <TextField source="date" />
+            <DateField source="date" locales="fr-FR" />
             <TextField source="schedule" />
             <ReferenceField label="Scène" source="scene_id" reference="scenes">
                 <TextField source="name" />
