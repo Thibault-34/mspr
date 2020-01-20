@@ -9,13 +9,14 @@ import {
     TextField,
     ReferenceInput,
     SelectInput,
+    ReferenceField,
 } from 'react-admin'
 
 export const eventCreate = props => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="date" />
-            <TextInput source="schedule" />
+            <TextInput helperText="YYYY/MM/DD" source="date" />
+            <TextInput helperText="HH:MM:SS" source="schedule" />
             <ReferenceInput
                 label="Artiste"
                 source="artiste_id"
@@ -45,6 +46,16 @@ export const eventList = props => (
             <TextField source="id" />
             <TextField source="date" />
             <TextField source="schedule" />
+            <ReferenceField label="Scène" source="scene_id" reference="scenes">
+                <TextField source="name" />
+            </ReferenceField>
+            <ReferenceField
+                label="Artiste"
+                source="artiste_id"
+                reference="artists"
+            >
+                <TextField source="name" />
+            </ReferenceField>
         </Datagrid>
     </List>
 )

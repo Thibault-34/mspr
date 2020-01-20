@@ -14,6 +14,12 @@ import { sceneCreate } from './components/scene'
 import { pageList } from './components/page'
 import { pageEdit } from './components/page'
 import { pageCreate } from './components/page'
+import { pointinterestList } from './components/pointinterest'
+import { pointinterestEdit } from './components/pointinterest'
+import { pointinterestCreate } from './components/pointinterest'
+import { pointinteresttocategoryList } from './components/pointinteresttocategory'
+import { pointinteresttocategoryEdit } from './components/pointinteresttocategory'
+import { pointinteresttocategoryCreate } from './components/pointinteresttocategory'
 
 const dataProvider = jsonServerProvider('http://localhost:8000')
 const App = () => (
@@ -41,6 +47,18 @@ const App = () => (
             list={pageList}
             edit={pageEdit}
             create={pageCreate}
+        />
+        <Resource
+            name="pointinterests"
+            list={pointinterestList}
+            edit={pointinterestEdit}
+            create={pointinterestCreate}
+        />
+        <Resource
+            name="pointinteresttocategorys"
+            list={pointinteresttocategoryList}
+            edit={pointinteresttocategoryEdit}
+            create={pointinteresttocategoryCreate}
         />
     </Admin>
 )

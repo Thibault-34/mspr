@@ -7,6 +7,8 @@ import {
     List,
     Datagrid,
     TextField,
+    ReferenceInput,
+    SelectInput,
     ReferenceField,
     SelectField,
 } from 'react-admin'
@@ -15,10 +17,6 @@ export const sceneCreate = props => (
     <Create {...props}>
         <SimpleForm>
             <TextInput source="name" />
-            <TextInput source="localisation_id" />
-            <ReferenceField source="localisations" reference="localisations">
-                <SelectField source="name" />
-            </ReferenceField>
         </SimpleForm>
     </Create>
 )
