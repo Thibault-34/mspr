@@ -22,19 +22,10 @@ const getOne = (table, id) => {
 }
 
 const updateOne = (table, id, fields) => {
-    const {
-        name,
-        style,
-        image,
-        description,
-        facebook,
-        instagram,
-        spotify,
-    } = fields
-
     return new Promise(resolve => {
         con.query(
-            `UPDATE ${table} SET name = "${name}", style = "${style}", image = "${image}", description = "${description}", facebook = "${facebook}", instagram = "${instagram}", spotify = "${spotify}" WHERE id = ${id}`,
+            `UPDATE ?? SET ? WHERE id = ?`,
+            [table, fields, id],
             (error, results, fields) => {
                 if (error) throw error
                 resolve(id)
@@ -44,24 +35,13 @@ const updateOne = (table, id, fields) => {
 }
 
 const createOne = (table, fields) => {
-    const {
-        name,
-        style,
-        image,
-        description,
-        facebook,
-        instagram,
-        spotify,
-    } = fields
-
+    console.log(sql)
     return new Promise(resolve => {
         con.query(
-            `INSERT INTO ${table} (id, name, style, image, description, facebook, instagram, spotify) 
-			VALUES (NULL, "${name}", "${style}", "${image}", "${description}", "${facebook}", "${instagram}", "${spotify}")
-			`,
+            `INSERT INTO ?? (?) VALUES (?)`,
+            [table, Object.keys(fields), Object.values(fields)],
             (error, results) => {
                 if (error) throw error
-
                 resolve({ ...results, id: results.insertId })
             }
         )
