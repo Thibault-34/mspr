@@ -7,7 +7,7 @@ const con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'mspr_bdd',
+    database: 'mspr',
     multipleStatements: true,
     port: 3308,
 })

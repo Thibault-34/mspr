@@ -7,10 +7,10 @@ const {
     deleteOne,
 } = require('../database/utils')
 
-const eventRouter = express.Router()
-const road = 'event'
+const categoryRouter = express.Router()
+const road = 'category'
 
-eventRouter.get('/', (req, res) => {
+categoryRouter.get('/', (req, res) => {
     getList(road).then(result => {
         res.set({
             'X-Total-Count': '100',
@@ -20,28 +20,28 @@ eventRouter.get('/', (req, res) => {
     })
 })
 
-eventRouter.post('/', (req, res) => {
+categoryRouter.post('/', (req, res) => {
     createOne(road, req.body).then(result => {
         res.json(result)
     })
 })
 
-eventRouter.put('/:id', (req, res) => {
+categoryRouter.put('/:id', (req, res) => {
     updateOne(road, req.params.id, req.body).then(id => {
         res.status(200).send({ id })
     })
 })
 
-eventRouter.get('/:id', (req, res) =>
+categoryRouter.get('/:id', (req, res) =>
     getOne(road, req.params.id).then(result => {
         res.json(result)
     })
 )
 
-eventRouter.delete('/:id', (req, res) => {
+categoryRouter.delete('/:id', (req, res) => {
     deleteOne(road, req.params.id).then(result => {
         res.json(result)
     })
 })
 
-module.exports = eventRouter
+module.exports = categoryRouter
